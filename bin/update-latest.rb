@@ -4,7 +4,7 @@ require 'redis'
 require "net/https"
 require 'pony'
 
-ruri = URI.parse(ENV["REDISTOGO_URL"])
+ruri = URI.parse(ENV['REDISTOGO_URL'])
 REDIS = Redis.new(:host => ruri.host, :port => ruri.port, :password => ruri.password)
 
 ACTIONS_KEY = "#{ENV['TRELLO_BOARD_ID']}:actions"
@@ -28,16 +28,8 @@ def get_card_url(id)
 end
 
 def get_prev_actions
-  prev_json = REDIS.get(ACTIONS_KEY)
-  if prev_json
-    JSON.parse(prev_json)
-  else
-    []
-  end
-end
-
-def set_latest_actions(actions)
-  REDIS.set(ACTIONS_KEY, actions.to_json)
+  prev_json = REDIS.get(ACTIONS_KEY) || '[]'
+  JSON.parse(prev_json)
 end
 
 def send_email(subject, body)
@@ -65,9 +57,7 @@ new_actions = cur_actions - prev_actions
 puts "Sending emails for #{new_actions.length} new actions."
 
 new_actions.each do |action|
-  card_id = action['data']['card']['id']
   card_url = get_card_url(action['data']['card']['id'])
-
   taskName = action['data']['card']['name']
   creatorName = action['memberCreator']['fullName']
 
@@ -82,4 +72,4 @@ eos
   send_email(subject, body)
 end
 
-set_latest_actions(cur_actions)
+REDIS.set(ACTIONS_KEY, cur_actions.to_json)
