@@ -1,1 +1,1 @@
-worker: ruby trello-bot.rb
+worker: ruby trello-mailer.rb
