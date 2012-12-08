@@ -75,11 +75,11 @@ new_actions.each do |action|
   taskName = action['data']['card']['name']
   creatorName = action['memberCreator']['fullName']
 
-  subject = "Trello: #{creatorName} added \"#{taskName}\""
+  subject = "New card: \"#{taskName}\""
 
   body = <<-eos
-#{subject}
-
+#{creatorName} added \"#{taskName}\".
+<br />
 #{card_url}
 eos
 
