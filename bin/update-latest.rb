@@ -62,7 +62,9 @@ prev_actions = get_prev_actions()
 cur_actions = get_actions()
 new_actions = cur_actions - prev_actions
 
-new_actions[0..3].each do |action|
+puts "Sending emails for #{new_actions.length} new actions."
+
+new_actions.each do |action|
   card_id = action['data']['card']['id']
   card_url = get_card_url(action['data']['card']['id'])
 
