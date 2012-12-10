@@ -1,7 +1,7 @@
 trello-mailer
 =============
 
-Mails an email address when new trello cards are created. Depends on Redis and Sendgrid. Built for deployment to Heroku with a scheduled task.
+Mails an email address and/or posts to Flowdock when new trello cards are created. Depends on Redis and Sendgrid. Built for deployment to Heroku with a scheduled task.
 
 Required environment variables:
 * TRELLO_KEY
