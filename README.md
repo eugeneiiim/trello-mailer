@@ -1,3 +1,6 @@
+Note (12/25/12) - you can achieve the same thing more easily via Zapier: https://zapier.com/zapbook/trello/flowdock/2796/flowdock-message-for-trello-card/
+
+
 trello-mailer
 =============
 
